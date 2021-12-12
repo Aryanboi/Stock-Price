@@ -4,7 +4,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
 from streamlit.type_util import OptionSequence
 from annotated_text import annotated_text
 
