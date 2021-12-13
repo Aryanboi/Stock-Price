@@ -21,6 +21,8 @@ annotated_text(
                 (' - '),
                 ('2017','', '#8ef'),
 )
+
+sidebar.image("https://media.giphy.com/media/WodUmk8kNCAu2kdWwu/giphy.gif", width=200)
 #----------------------------------------------------------------------------------------------------
 
 st.markdown('   ')
@@ -32,9 +34,15 @@ col3.markdown("<p>'This project is about the Analysis of shares of S&P 500 and i
 col2.image('th.jpg',use_column_width=True)
 col4.image('SP-500-Companies-List.png',use_column_width=True)
 #--------------------------------------------------------------------------------
+sidebar.markdown('---')  
+
+
+
+               
+
 st.markdown('---')
-option = sidebar.radio("Select:", ('Overview','Insight'))
-sidebar.markdown('---')
+option = st.radio("Select:", ('Overview','Insight'))
+
 
 with st.spinner('| Just a sec |'):
 
@@ -52,7 +60,7 @@ with st.spinner('| Just a sec |'):
         st.plotly_chart(fig)
 
         st.plotly_chart(px.bar(df, x='Date', y='Volume',template='plotly_dark',width =1100,  height=650 , title='Volume Of Shares traded every month'))
-        st.markdown('---')
+        
 #-----------------------------------------------------------------------------------------------------------------------
         df.index= pd.to_datetime(df.index)
         df.reset_index(inplace=True)
@@ -60,7 +68,31 @@ with st.spinner('| Just a sec |'):
         df['month'] = df['Date'].dt.month
         df['year'] = df['Date'].dt.year
         st.plotly_chart(px.pie(  df, names='year', values='Volume' , template='plotly_dark',width =1100,  height=650 , color_discrete_sequence=px.colors.sequential.dense_r , title='Volume Of Shares traded each Year'))
+        st.markdown('---')
+        st.markdown('---')
     #------------------------------------------------------------
+        option1= sidebar.selectbox('About', ('"You should know!"','what is S&P 500 Companies?','History of S&P 500', 'How does the company enter the S&P 500?'))  
+    
+        if option1 =='what is S&P 500 Companies?':
+            sidebar.write('The Standard and Poor\'s 500, or simply the S&P 500, is a stock market index tracking the performance of 500 large companies listed on stock exchanges in the United States.')
+
+        elif option1 == 'History of S&P 500':
+            sidebar.write('* In 1860, Henry Varnum Poor formed Poor\'s Publishing, which published an investor\'s guide to the railroad industry.') 
+            sidebar.write('* In 1923, Standard Statistics Company (founded in 1906 as the Standard Statistics Bureau) began rating mortgage bonds and developed its first stock market index consisting of the stocks of 233 U.S. companies, computed weekly.')
+            sidebar.write('* In 1926, it developed a 90-stock index, computed daily.')
+            sidebar.write('* In 1941, Poor\'s Publishing merged with Standard Statistics Company to form Standard & Poor\'s.On Monday, March 4, 1957, the index was expanded to its current 500 companies and was renamed the S&P 500 Stock Composite Index.')
+
+
+        elif option1 =='How does the company enter the S&P 500?':
+            sidebar.write('* Market capitalization must be greater than or equal to US$13.1 billion according to 2021 guidelines.')
+            sidebar.write('* Annual dollar value traded to float-adjusted market capitalization is greater than 1.0')
+            sidebar.write('* Minimum monthly trading volume of 250,000 shares in each of the six months leading up to the evaluation date')
+            sidebar.write('* Must be publicly listed on either the New York Stock Exchange (including NYSE Arca or NYSE American) or NASDAQ (NASDAQ Global Select Market, NASDAQ Select Market or the NASDAQ Capital Market).')
+            sidebar.write('*  The company should be from the U.S')
+
+        sidebar.markdown('---')   
+
+
         option3=sidebar.selectbox('S&P 500 Report',('"Select the Year"','2014','2015','2016','2017'))
 
         if option3=='2014':
@@ -91,6 +123,7 @@ with st.spinner('| Just a sec |'):
             sidebar.write('* Information technology had the most foreign exposure of any sector, even though it declined to 56.95% from 2016’s 57.15%. Energy, which was last year’s lead sector, declined to 54.06% from 58.88% in 2016.')
             sidebar.write('* Given the ongoing debate and legislative actions on sales, tariffs, and jobs, the level of specific data disclosed by companies continues to be disappointing.')
 
+        sidebar.markdown('---')  
         
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +150,7 @@ with st.spinner('| Just a sec |'):
         col2.plotly_chart(px.line(df_selection, x='Date', y='Close',color='Company',template='plotly_dark',width =650,  height=650,title='Closing Stock Price'))
         col1.plotly_chart(px.line(df_selection,x='Date', y='High',color = 'Company',template='plotly_dark',width =650,  height=650,title='Highest Stock Price'))
         col2.plotly_chart(px.line(df_selection,x='Date', y='Low',color = 'Company',template='plotly_dark',width =650,  height=650,title='Lowest Stock Price'))
-        st.plotly_chart(px.line(df_selection,x='Date', y='Volume',color = 'Company',template='plotly_dark',width =650,  height=650,title='Volume of Stock traded'))      
+        st.plotly_chart(px.line(df_selection,x='Date', y='Volume',color = 'Company',template='plotly_dark',width =1100,  height=650,title='Volume of Stock traded'))      
         
 
         st.markdown('---')
@@ -136,28 +169,11 @@ with st.spinner('| Just a sec |'):
         st.plotly_chart(fig)
 
         st.markdown('---')
+        sidebar.markdown('---')  
 #--------------------------------------------------------------------------------------------------------------------------------------------        
  #----------------------------------------------------------------------------------------------------
-sidebar.markdown('---')
-option1= sidebar.selectbox('About', ('"You should know!"','what is S&P 500 Companies?','History of S&P 500', 'How does the company enter the S&P 500?'))  
-    
-if option1 =='what is S&P 500 Companies?':
-    sidebar.write('The Standard and Poor\'s 500, or simply the S&P 500, is a stock market index tracking the performance of 500 large companies listed on stock exchanges in the United States.')
-
-elif option1 == 'History of S&P 500':
-    sidebar.write('* In 1860, Henry Varnum Poor formed Poor\'s Publishing, which published an investor\'s guide to the railroad industry.') 
-    sidebar.write('* In 1923, Standard Statistics Company (founded in 1906 as the Standard Statistics Bureau) began rating mortgage bonds and developed its first stock market index consisting of the stocks of 233 U.S. companies, computed weekly.')
-    sidebar.write('* In 1926, it developed a 90-stock index, computed daily.')
-    sidebar.write('* In 1941, Poor\'s Publishing merged with Standard Statistics Company to form Standard & Poor\'s.On Monday, March 4, 1957, the index was expanded to its current 500 companies and was renamed the S&P 500 Stock Composite Index.')
 
 
-elif option1 =='How does the company enter the S&P 500?':
-    sidebar.write('* Market capitalization must be greater than or equal to US$13.1 billion according to 2021 guidelines.')
-    sidebar.write('* Annual dollar value traded to float-adjusted market capitalization is greater than 1.0')
-    sidebar.write('* Minimum monthly trading volume of 250,000 shares in each of the six months leading up to the evaluation date')
-    sidebar.write('* Must be publicly listed on either the New York Stock Exchange (including NYSE Arca or NYSE American) or NASDAQ (NASDAQ Global Select Market, NASDAQ Select Market or the NASDAQ Capital Market).')
-    sidebar.write('*  The company should be from the U.S')
-    
                
 
                 
