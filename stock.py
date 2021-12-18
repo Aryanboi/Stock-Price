@@ -38,8 +38,6 @@ sidebar.markdown('---')
 
 
 
-               
-
 st.markdown('---')
 option = st.radio("Select:", ('Overview','Insight'))
 
@@ -69,7 +67,7 @@ with st.spinner('| Just a sec |'):
         df['year'] = df['Date'].dt.year
         st.plotly_chart(px.pie(  df, names='year', values='Volume' , template='plotly_dark',width =1100,  height=650 , color_discrete_sequence=px.colors.sequential.dense_r , title='Volume Of Shares traded each Year'))
         st.markdown('---')
-        st.markdown('---')
+        
     #------------------------------------------------------------
         option1= sidebar.selectbox('About', ('"You should know!"','what is S&P 500 Companies?','History of S&P 500', 'How does the company enter the S&P 500?'))  
     
